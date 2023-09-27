@@ -46,7 +46,12 @@ const scenes = [{
 
 const getBackground = document.getElementById('background');
 const startBtn = document.getElementById('startBtn');
+const starterOverlay = document.getElementById('text_overlay');
 
+const sceneBtn = document.getElementById('sceneBtn');
+const soundBtn = document.getElementById('soundBtn');
+
+//transition from starter screen
 startBtn.addEventListener("click", () => {
     alert("Clicked!");
     changeBackground();
@@ -57,4 +62,15 @@ function changeBackground() {
     console.log(randNum);
     getBackground.style.backgroundImage = `url(${scenes[randNum].background})`;    
     console.log(scenes[randNum].background);
+    //remove overlay and change buttons display to show
+    if (starterOverlay.style.visibility === "hidden") {
+        starterOverlay.style.visibility = "visible";
+    } else {
+        starterOverlay.style.visibility = "hidden";
+    } 
+    
+    
+    sceneBtn.style.visibility = "visible";
+    soundBtn.style.visibility = "visible";
+
 }
