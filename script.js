@@ -57,11 +57,13 @@ startBtn.addEventListener("click", () => {
     changeBackground();
 })
 
+//can't take randNum out because it needs to change each time btn is clicked;
+//could make randNum a function and call it or can make return of changeBackground input for soundBtn
+
 function changeBackground() {
     let randNum = Math.floor((Math.random() * scenes.length) + 1);
     console.log(randNum);
-    // let scene = scenes[randNum];
-    // console.log(scene);
+    
     getBackground.style.backgroundImage = `url(${scenes[randNum].background})`;    
     console.log(scenes[randNum].background);
     console.log(typeof(scenes[randNum])); //this is an object
@@ -74,24 +76,22 @@ function changeBackground() {
     
     
     sceneBtn.style.visibility = "visible";
-    soundBtn.style.visibility = "visible";
-
-    return randNum;
+    soundBtn.style.visibility = "visible";    
 }
 
 sceneBtn.addEventListener("click", () => {   
     let randNum = Math.floor((Math.random() * scenes.length) + 1);
     console.log(randNum);
     getBackground.style.backgroundImage = `url(${scenes[randNum].background})`;    
-    console.log(scenes[randNum].background);    
+    console.log(scenes[randNum].background);   
+    return randNum;     
 });
 
-soundBtn.addEventListener("click", () => {
-    // randNum is not getting passed in correctly; for this, it is undefined
-    //something about the way this is written is incorrect; always returns false
+soundBtn.addEventListener("click", (randNum) => {   
+    console.log(randNum);
     if (scenes[randNum].hasOwnProperty("sound")) {
         //if that scene object has a sound property, play sound
-        let audio = new Audio(scenes[randNum].sound);
+        let audio = new Audio(scenes[randNum].sound); //this might need to be a string template literal
         console.log(audio)
     } else {
         alert("Sorry, this scene does not have audio!");
